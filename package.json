@@ -1,0 +1,25 @@
+{
+  "name": "tapsolution",
+  "version": "1.0.0",
+  "description": "TapSoluiton Business - Template Platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aorelhas/tapsolution.git"
+  },
+  "author": "Carlos Orelhas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aorelhas/tapsolution/issues"
+  },
+  "homepage": "https://github.com/aorelhas/tapsolution#readme",
+  "dependencies": {
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.5.0",
+    "mongoose": "^5.9.18"
+  }
+}

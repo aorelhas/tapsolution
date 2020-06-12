@@ -18,12 +18,28 @@ router.post('/create/:user_id', async (req, res) => {
   form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
     if (err) {
-      return res.status(400).json({ msg: err.array() });
+      return res.status(400).json({ msg: 'Image not valid' });
+    }
+
+    const { name, description, price, category, quantity, shipping } = fields;
+
+    if (
+      !name ||
+      !description ||
+      !price ||
+      !category ||
+      !quantity ||
+      !shipping
+    ) {
+      return res.status(400).json({ msg: 'Please fill all the fields' });
     }
 
     let product = new Product(fields);
 
     if (files.photo) {
+      if (files.photo.size > 1000000) {
+        return res.status(400).json({ msg: 'Image should be less than 1MB' });
+      }
       product.photo.data = fs.readFileSync(files.photo.path);
       product.photo.contentType = files.photo.type;
     }

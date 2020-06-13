@@ -1,22 +1,14 @@
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const User = require('../models/User');
 
 module.exports = function (req, res, next) {
-  const token = req.header('x-auth-token');
+  let user = User.findById(req.params.id);
 
-  if (!token) {
-    return res.status(400).json({ msg: 'No token, invalid authorization' });
+  if (!user) {
+    return res.status(400).json({ msg: 'No user found' });
   }
-
-  try {
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
-    console.log(req.user.role);
-    if (req.user.role === 0) {
-      return res.sstatus(403).json({ msg: 'Admin Resource' });
-    }
-    req.user = decoded.user;
-    next();
-  } catch (err) {
-    res.status(401).json({ msg: 'Token is not valid' });
+  console.log(user.role);
+  if (user.role === 0) {
+    return res.status(403).json({ msg: 'You must be admin!' });
   }
+  next();
 };

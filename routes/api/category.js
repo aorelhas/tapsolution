@@ -94,7 +94,7 @@ router.delete('/:id/:user_id', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/category/update
+// @route   PUT api/category/update/:id/:user_id
 // @desc    Update Product
 // @access  Private
 router.put(
@@ -111,11 +111,11 @@ router.put(
     const fields = { name };
 
     try {
-      let category = await Category.findOne({ name });
+      let category = await Category.findById(req.params.id);
 
       if (category) {
         category = await Category.findOneAndUpdate(
-          { id: req.params.id },
+          { _id: req.params.id },
           { $set: fields },
           { new: true }
         );
@@ -129,5 +129,19 @@ router.put(
     }
   }
 );
+
+// @route    GET api/category
+// @desc     Get all Categories
+// @access   Public
+router.get('/', async (req, res) => {
+  try {
+    const categories = await Category.find();
+
+    res.json(categories);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error!');
+  }
+});
 
 module.exports = router;

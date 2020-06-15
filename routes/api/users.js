@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
@@ -69,6 +70,67 @@ router.post(
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error!!');
+    }
+  }
+);
+
+// @route   GET api/users/me
+// @desc    Get current users profile
+// @access  Private
+router.get('/me', auth, async (req, res) => {
+  try {
+    const profile = await User.findById(req.user.id);
+
+    if (!profile) {
+      res.status(400).json({ msg: 'There is no profile for this user' });
+    }
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error!');
+  }
+});
+
+// @route   PUT api/users/me
+// @desc    Update user profile
+// @access  Private
+router.put(
+  '/me',
+  auth,
+  [
+    check('name', 'Name is rquiered').not().isEmpty(),
+    check('email', 'Email is required').isEmail(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, email } = req.body;
+    const updateUser = {
+      name,
+      email,
+    };
+
+    try {
+      let updateProfile = await User.findOneAndUpdate({ _id: req.user.id });
+
+      if (updateProfile) {
+        updateProfile = await User.findOneAndUpdate(
+          {
+            _id: req.user.id,
+          },
+          { $set: updateUser },
+          { new: true }
+        );
+        return res.json(updateProfile);
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error!');
     }
   }
 );

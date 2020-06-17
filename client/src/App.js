@@ -7,18 +7,22 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Navbar from './components/layouts/Navbar';
 
+import AuthState from './context/auth/AuthState';
+
 const App = () => {
   return (
-    <Router>
-      <Fragment>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-        </Switch>
-      </Fragment>
-    </Router>
+    <AuthState>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </AuthState>
   );
 };
 

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/aorelhas/tapsolution#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^5.2.0",

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 
-export const Landing = () => {
+const Home = () => {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ export const Landing = () => {
     //eslint-disable-next-line
   }, []);
 
-  return <div>Landing Page</div>;
+  return <div>Home After Login</div>;
 };
 
-export default Landing;
+export default Home;

@@ -1,37 +1,26 @@
 {
   "name": "tapsolution",
   "version": "1.0.0",
-  "description": "TapSoluiton Business - Template Platform",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aorelhas/tapsolution.git"
   },
-  "author": "Carlos Orelhas",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aorelhas/tapsolution/issues"
   },
   "homepage": "https://github.com/aorelhas/tapsolution#readme",
   "dependencies": {
-    "axios": "^0.19.2",
-    "bcrypt": "^5.0.0",
-    "bcryptjs": "^2.4.3",
-    "concurrently": "^5.2.0",
-    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-validator": "^6.5.0",
-    "formidable": "^1.2.2",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "mongoose": "^5.9.18",
-    "react-router-dom": "^5.2.0",
-    "uuid": "^8.1.0"
+    "mongoose": "^5.10.5",
+    "nodemon": "^2.0.4"
   }
 }

@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
@@ -18,6 +21,11 @@ mongoose
   .then(() => {
     console.log('DB Connected');
   });
+
+// Middleware
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Routes
 app.use('/api', userRoutes);

@@ -3,11 +3,18 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
 
 require('dotenv').config();
 
 // Import Routes
+// const userController = require('./controllers/user');
 const userRoutes = require('./routes/user');
+
+/**
+ * API keys and Passport configuration.
+ */
+const passportConfig = require('./config/passport');
 
 const app = express();
 
@@ -26,6 +33,8 @@ mongoose
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/api', userRoutes);

@@ -4,6 +4,7 @@ const expressJwt = require('express-jwt');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const validator = require('validator');
+const flash = require('flash');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 /**
@@ -18,8 +19,7 @@ exports.signin = (req, res, next) => {
     validationErrors.push({ msg: 'Password cannot be blank.' });
 
   if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/login');
+    return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -30,15 +30,13 @@ exports.signin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      console.log('error');
-      return res.redirect('/login');
+      return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
     });
   })(req, res, next);
 };
@@ -59,7 +57,7 @@ exports.signup = (req, res, next) => {
     validationErrors.push({ msg: 'Passwords do not match' });
 
   if (validationErrors.length) {
-    req.flash('errors', validationErrors);
+    // req.flash('errors', validationErrors);
     return res.redirect('/signup');
   }
   req.body.email = validator.normalizeEmail(req.body.email, {

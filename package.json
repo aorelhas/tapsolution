@@ -1,39 +1,41 @@
 {
   "name": "tapsolution",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "The best templates you can find on the internet",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon ./lib/app.js"
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix freontend",
+    "dev": "concurrentyle \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aorelhas/tapsolution.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Templates",
+    "html5",
+    "bootstrap",
+    "javascript",
+    "mobile",
+    "mobie-friendly"
+  ],
+  "author": "Carlos Orelhas",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aorelhas/tapsolution/issues"
   },
   "homepage": "https://github.com/aorelhas/tapsolution#readme",
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
+    "colors": "^1.4.0",
+    "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-jwt": "^6.0.0",
-    "express-validator": "^6.6.1",
-    "flash": "^1.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.5",
+    "mongoose": "^5.11.4",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.4",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
-    "uuid": "^8.3.0",
-    "validator": "^13.1.1"
+    "nodemon": "^2.0.6"
   }
 }

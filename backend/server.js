@@ -1,21 +1,30 @@
-import express from 'express'
-import morgan from 'morgan'
-import dotenv from 'dotenv'
-import colors from 'colors'
+import express from 'express';
+import dotenv from 'dotenv';
+import colors from 'colors';
+import morgan from 'morgan';
+import connectDB from './config/db.js';
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+connectDB();
 
-if(process.env.NODE_ENV === 'development')
-{
-    app.use(morgan('dev'))
+const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
 }
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('API Running...');
 });
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`Server Running in ${process.env.NODE_ENV} mode on ${PORT}`.yellow.bold))
+app.listen(
+  PORT,
+  console.log(
+    `Server Running in ${process.env.NODE_ENV} mode on ${PORT}`.yellow.bold
+  )
+);

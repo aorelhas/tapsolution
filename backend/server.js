@@ -7,14 +7,15 @@ import session from 'express-session';
 
 import connectDB from './config/db.js';
 
-dotenv.config();
-
-connectDB();
-
 /**
  * Controllers (route handlers).
  */
 import userRoutes from './routes/userRoutes.js';
+
+dotenv.config();
+
+connectDB();
+
 
 // import passportConfig from './config/passport.js'
 
@@ -26,17 +27,13 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API Running...');
-});
-
 // Express-Session
 app.use(
   session({
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true, maxAge: 1209600000 }, // two weeks in milliseconds
+    cookie: { secure: true, maxAge: '2d' }, // two weeks in milliseconds
   })
 );
 

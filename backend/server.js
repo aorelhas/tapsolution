@@ -1,23 +1,23 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import passport from 'passport';
-import colors from 'colors';
-import morgan from 'morgan';
-import session from 'express-session';
+const express = require('express')
+const dotenv = require ('dotenv');
+const passport = require ('passport');
+const colors = require ('colors');
+const morgan = require ('morgan');
+const session = require ('express-session');
 
-import connectDB from './config/db.js';
+const connectDB = require( './config/db.js');
 
 /**
  * Controllers (route handlers).
  */
-import userRoutes from './routes/userRoutes.js';
+const userRoutes = require( './routes/userRoutes.js');
 
 dotenv.config();
 
+// Passport config
+require('./config/passport')(passport)
+
 connectDB();
-
-
-// import passportConfig from './config/passport.js'
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true, maxAge: '2d' }, // two weeks in milliseconds
+    // cookie: { secure: true, maxAge: '2d' }, // two weeks in milliseconds
   })
 );
 
@@ -44,7 +44,7 @@ app.use(passport.session());
 /**
  * Primary app routes.
  */
-app.use('/auth', userRoutes)
+app.use('/auth', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 

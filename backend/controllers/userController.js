@@ -1,2 +1,4 @@
-import passport from 'passport'
-import User from '../models/userModel.js';
+const passport = require('passport')
+const User = require( '../models/userModel.js');
+
+module.exports = router;

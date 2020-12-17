@@ -7,7 +7,7 @@ const Header = () => {
     <header>
       <Navbar bg="light" variant="light" expand="lg">
         <LinkContainer to="/">
-          <Navbar.Brand>React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand>TapSolution</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

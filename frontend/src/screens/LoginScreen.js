@@ -1,5 +1,8 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const LoginScreen = () => {
   const responseGoogle = (response) => {
@@ -16,7 +19,7 @@ const LoginScreen = () => {
         </div>
         <div className="form-group">
           <GoogleLogin
-            clientId="302461378214-eg67gbtvu72g9ho2rrn6d4j5obvseo79.apps.googleusercontent.com"
+            clientId={process.env.REACT_GOOGLE_CLIENT_ID}
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
